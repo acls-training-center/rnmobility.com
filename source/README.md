@@ -1,3 +1,7 @@
+---
+layout: null
+---
+
 ![Tests](https://github.com/acls-training-center/rnmobility.com/workflows/Tests/badge.svg)
 
 # RN Mobility
