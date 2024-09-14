@@ -1,58 +1,162 @@
-<div class="w-100">
-  <h2>Online ACLS Recertification in 2-5 hours</h2>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="text-white"><strong>Courses</strong></h4>
+        <div class="footer-links">
+          <a href="https://www.acls.net/acls">ACLS</a>
+          <a href="https://www.acls.net/bls">BLS</a>
+          <a href="https://www.acls.net/pals">PALS</a>
+          <a href="https://www.acls.net/monitor-tech">Monitor tech</a>
+          <a href="https://www.acls.net/monitor-tech#arrhythmia-interpretation">Arrhythmia interpretation</a>
+          <a href="https://www.acls.net/monitor-tech#12-lead-ecg">12-lead ECG</a>
+          <a href="https://www.acls.net/bbp">BBP (OSHA)</a>
+        </div>
+        <h4 class="text-white mt-4"><strong>Algorithms</strong></h4>
+        <div class="footer-links">
+          <a href="https://www.acls.net/aclsalg">ACLS algorithms</a>
+          <a href="https://www.acls.net/bls-algorithms">BLS algorithms</a>
+          <a href="https://www.acls.net/pals-algorithms">PALS algorithms</a>
+        </div>
+      </div>
+      <div class="col-lg-3 mt-3 mt-lg-0">
+        <h4 class="text-white"><strong>Resources</strong></h4>
+        <div class="footer-links px-0">
+          <div>
+            <a class="d-inline" href="https://www.acls.net/quiz">ACLS pretest, </a>
+            <a class="d-inline" href="https://www.acls.net/quiz">BLS quizzes, </a>
+            <a class="d-inline" href="https://www.acls.net/quiz">PALS quizzes, </a>
+            <a class="d-inline" href="https://www.acls.net/quiz#just-for-ems">EMS quizzes</a>
+          </div>
+          <a href="https://www.acls.net/printed_products">Crash cart/pocket cards</a>
+          <a href="https://www.acls.net/how-our-courses-work">How our courses work</a>
+          <a href="https://www.acls.net/acls-faq">ACLS frequently asked questions</a>
+          <a href="https://www.acls.net/videos">ACLS videos</a>
+          <div>
+            <a class="d-inline" href="https://www.acls.net/nrp-prep/">Resources for NRP:</a>
+            <a class="d-inline" href="https://www.acls.net/quizzes/nrp/nrp">practice test, </a>
+            <a class="d-inline" href="https://www.acls.net/nrp-prep/curriculum">curriculum, </a>
+            <a class="d-inline" href="https://www.acls.net/nrp-prep/flashcard">flashcards</a>
+          </div>
+          <a href="https://www.acls.net/acls-crash-cart-faq">ACLS crash FAQ</a>
+          <a href="https://www.acls.net/icd-10-flashcards">ICD-10 flashcards (humor)</a>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-3 mt-lg-0">
+        <h4 class="text-white"><strong>Accreditations</strong></h4>
+        <div class="footer-links px-0">
+          <div>
+            <a class="d-inline" href="https://www.acls.net/#accreditations">ACCME (AMA), </a>
+            <a class="d-inline" href="https://www.acls.net/#accreditations">ANCC, </a>
+            <a class="d-inline" href="https://www.acls.net/#accreditations">ADA, </a>
+            <a class="d-inline" href="https://www.acls.net/#accreditations">ACPE </a>
+          </div>
+          <p>
+            Our brand approvals, US states primarily in Eastern Time Zone:
+            <a class="d-inline" href="/connecticutce">CT,</a>
+            <a class="d-inline state-abbr" href="/delawarece">DE,</a>
+            <a class="d-inline state-abbr" href="/floridace">FL,</a>
+            <a class="d-inline state-abbr" href="/georgiace">GA,</a>
+            <a class="d-inline state-abbr" href="/indianace">IN,</a>
+            <a class="d-inline state-abbr" href="/kentuckyce">KY,</a>
+            <a class="d-inline state-abbr" href="/mainece">ME,</a>
+            <a class="d-inline state-abbr" href="/marylandce">MD,</a>
+            <a class="d-inline state-abbr" href="/massachusettsce">MA,</a>
+            <a class="d-inline state-abbr" href="/michigance">MI,</a>
+            <a class="d-inline state-abbr" href="/new-hampshirece">NH,</a>
+            <a class="d-inline state-abbr" href="/new-yorkce">NY,</a>
+            <a class="d-inline state-abbr" href="/new-jerseyce">NJ,</a>
+            <a class="d-inline state-abbr" href="/north-carolinace">NC,</a>
+            <a class="d-inline state-abbr" href="/ohioce">OH,</a>
+            <a class="d-inline state-abbr" href="/pennsylvaniace">PA,</a>
+            <a class="d-inline state-abbr" href="/rhode-islandce">RI,</a>
+            <a class="d-inline state-abbr" href="/south-carolinace">SC,</a>
+            <a class="d-inline state-abbr" href="/vermontce">VT,</a>
+            <a class="d-inline state-abbr" href="/virginiace">VA,</a>
+            <a class="d-inline state-abbr" href="/west-virginiace">WV,</a>
 
-  <form method="POST" action="https://lms.acls.net/my-shopping-cart-step-1/" class="form-inline courses-btns-form">
-    <input
-      name="source_website"
-      type="hidden"
-      value="{%- if page.experiment -%}{{site.url}}{{page.url | escape}}{%- elsif page.canonical-link -%}{{site.url}}{{page.canonical-link | escape}}{%- else -%}{{site.url}}{{page.url | escape}}{%- endif -%}"
-    >
-    <p>
-      <button
-        type="button"
-        class="btn btn-primary mb-1 course"
-        id="prechecked"
-        style="font-size:25px; background:red; border-color:darkred"
-        data-course="2"
-      >
-        <i class="bi bi-check2-square"></i>
-        ACLS <span class="tex-muted">$175</span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary mb-1 course"
-        style="font-size:25px; background:purple; border-color:purple"
-        data-course="4"
-      >
-        <i class="bi bi-square"></i>
-        PALS <span class="tex-muted">$175</span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary mb-1 course"
-        style="font-size:25px; background:blue; border-color:darkblue"
-        data-course="6"
-      >
-        <i class="bi bi-square"></i>
-        BLS <span class="tex-muted">$65</span>
-      </button>
-    </p>
-    <div class="w-100">
-      <button id="buynow" type="submit" class="btn btn-outline-secondary">
-        <i class="bi bi-cart-fill"></i> Buy now
-      </button>
-      <em>10% off with 2 courses, 15% off with 3</em>
+          </p>
+          <p>
+            Our brand approvals, US states primarily in Central Time Zone:
+            <a class="d-inline state-abbr" href="/alabamace">AL</a>
+            <a class="d-inline state-abbr" href="/arkansasce">AR, </a>
+            <a class="d-inline state-abbr" href="/illinoisce">IL, </a>
+            <a class="d-inline state-abbr" href="/iowace">IA, </a>
+            <a class="d-inline state-abbr" href="/kansasce">KS, </a>
+            <a class="d-inline state-abbr" href="/louisianace">LA, </a>
+            <a class="d-inline state-abbr" href="/minnesotace">MN, </a>
+            <a class="d-inline state-abbr" href="/mississippice">MS, </a>
+            <a class="d-inline state-abbr" href="/missourice">MO, </a>
+            <a class="d-inline state-abbr" href="/nebraskace">NE, </a>
+            <a class="d-inline state-abbr" href="/north-dakotace">ND, </a>
+            <a class="d-inline state-abbr" href="/oklahomace">OK, </a>
+            <a class="d-inline state-abbr" href="/south-dakotace">SD, </a>
+            <a class="d-inline state-abbr" href="/tennesseece">TN, </a>
+            <a class="d-inline state-abbr" href="/texasce">TX, </a>
+            <a class="d-inline state-abbr" href="/wisconsince">WI, </a>
+          </p>
+          <p>
+            Our brand approvals, US states primarily in Mountain/Arizona Time Zone:
+            <a class="d-inline state-abbr" href="/arizonace">AZ</a>
+            <a class="d-inline state-abbr" href="/coloradoce">CO</a>
+            <a class="d-inline state-abbr" href="/idahoce">ID</a>
+            <a class="d-inline state-abbr" href="/montanace">MT</a>
+            <a class="d-inline state-abbr" href="/nebraskace">NE</a>
+            <a class="d-inline state-abbr" href="/new-mexicoce">NM</a>
+            <a class="d-inline state-abbr" href="/north-dakotace">ND</a>
+            <a class="d-inline state-abbr" href="/south-dakotace">SD</a>
+            <a class="d-inline state-abbr" href="/utahce">UT</a>
+            <a class="d-inline state-abbr" href="/wyomingce">WY</a>
+          </p>
+          <p>
+            Our brand approvals, US states in Pacific/Alaska/Hawaii/Aleutian Time Zone:
+            <a class="d-inline state-abbr" href="/alaskace">AK</a>
+            <a class="d-inline state-abbr" href="/californiace">CA</a>
+            <a class="d-inline state-abbr" href="/hawaiice">HI</a>
+            <a class="d-inline state-abbr" href="/nevadace">NV</a>
+            <a class="d-inline state-abbr" href="/oregonce">OR</a>
+            <a class="d-inline state-abbr" href="/washingtonce">WA</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-2 mt-3 mt-lg-0">
+        <h4>
+          <a class="text-white" href="/aboutrnmobility"><strong>About us</strong></a>
+        </h4>
+        <div class="footer-links px-0">
+          <a href="https://www.acls.net/how-our-courses-work">How it works</a>
+          <a href="https://www.acls.net/group-discount">Group training</a>
+          <a href="https://www.acls.net/testimonials">Testimonials</a>
+          <a href="https://www.acls.net/blog">Blog</a>
+          <a href="https://www.acls.net/sitemap">Site map</a>
+          <a href="https://www.acls.net/contact">Contact us</a>
+        </div>
+      </div>
     </div>
-    <p>
-      <a href="https://www.acls.net/signup.php">... see our other courses and group discounts</a>
-    </p>
-  </form>
-</div>
-
-<footer class="text-center">
-  <p>&copy; {{ 'now' | date: '%Y' }} RNMobility.com, a service of acls.net</p>
+    <hr>
+    <div class="row">
+      <div class="col-md-5 order-2 order-md-1 mt-4 mt-md-0">
+        <p>
+          &copy; {{ 'now' | date: '%Y' -}}
+          , ACLS Training Center
+        </p>
+      </div>
+      <div class="col-md-7 text-md-end order-1 order-md-2 footer-links">
+        <a href="https://www.acls.net/privacy" class="d-md-inline">Privacy policy</a>
+        <a href="https://www.acls.net/terms" class="d-md-inline mx-md-4">Terms &amp; conditions</a>
+        <a href="https://www.acls.net/returns" class="d-md-inline">Returns</a>
+      </div>
+    </div>
+  </div>
 </footer>
+
 <!-- javascript -->
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
 <script>
   // Code below is used to include acls recertification in shopping cart
   // When code is initially loaded (This is pre checked option)

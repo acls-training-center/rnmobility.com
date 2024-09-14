@@ -3,8 +3,9 @@
   {%- include head.html -%}
 
   <body>
-    <div class="container">
-      {%- include header.html -%}
+    {%- include navbar.html -%}
+    <div class="container">  
+    {%- include header.html -%}
 
       <!-- Page content -->
       <p class="lead">
@@ -16,7 +17,9 @@
       {%- endif -%}
       {{ content }}
       {%- include public-feedback.html -%}
-      {%- include footer.html -%}
+      {%- include cta.html -%}
     </div>
+  </div>
+      {%- include footer.html -%}
   </body>
 </html>

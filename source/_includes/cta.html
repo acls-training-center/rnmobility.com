@@ -1,0 +1,50 @@
+<div class="w-100">
+  <h2>Online ACLS Recertification in 2-5 hours</h2>
+
+  <form method="POST" action="https://lms.acls.net/my-shopping-cart-step-1/" class="form-inline courses-btns-form">
+    <input
+      name="source_website"
+      type="hidden"
+      value="{%- if page.experiment -%}{{site.url}}{{page.url | escape}}{%- elsif page.canonical-link -%}{{site.url}}{{page.canonical-link | escape}}{%- else -%}{{site.url}}{{page.url | escape}}{%- endif -%}"
+    >
+    <p>
+      <button
+        type="button"
+        class="btn btn-primary mb-1 course"
+        id="prechecked"
+        style="font-size:25px; background:red; border-color:darkred"
+        data-course="2"
+      >
+        <i class="bi bi-check2-square"></i>
+        ACLS <span class="tex-muted">$175</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary mb-1 course"
+        style="font-size:25px; background:purple; border-color:purple"
+        data-course="4"
+      >
+        <i class="bi bi-square"></i>
+        PALS <span class="tex-muted">$175</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary mb-1 course"
+        style="font-size:25px; background:blue; border-color:darkblue"
+        data-course="6"
+      >
+        <i class="bi bi-square"></i>
+        BLS <span class="tex-muted">$65</span>
+      </button>
+    </p>
+    <div class="w-100">
+      <button id="buynow" type="submit" class="btn btn-outline-secondary">
+        <i class="bi bi-cart-fill"></i> Buy now
+      </button>
+      <em>10% off with 2 courses, 15% off with 3</em>
+    </div>
+    <p>
+      <a href="https://www.acls.net/signup.php">... see our other courses and group discounts</a>
+    </p>
+  </form>
+</div>
