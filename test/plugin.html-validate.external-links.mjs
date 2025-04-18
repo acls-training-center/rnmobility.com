@@ -40,6 +40,26 @@ async function runPromiseFunctionsWithParallelism(promiseFunctions, parallelism)
   return Promise.all(promisesInProgress);
 }
 
+/**
+ * Normalize URLs to ensure consistent casing for domain names
+ * URLs like https://ExAmple.com and https://example.com will be treated as the same URL
+ * https://github.com/fulldecent/github-pages-template/issues/123
+ *
+ * @param {string} url - The URL to normalize
+ * @returns {string} The normalized URL with lowercase domain
+ */
+function normalizeUrl(url) {
+  try {
+    const urlObj = new URL(url);
+    // Convert hostname to lowercase but keep path, query, and fragment with original casing
+    urlObj.hostname = urlObj.hostname.toLowerCase();
+    return urlObj.toString();
+  } catch (e) {
+    // If URL parsing fails, return the original URL
+    return url;
+  }
+}
+
 export default class ExternalLinksRule extends Rule {
   documentation() {
     return {
@@ -51,7 +71,7 @@ export default class ExternalLinksRule extends Rule {
   setup() {
     this.db = this.setupDatabase();
     this.skipUrlsRegex = this.loadSkipUrls();
-    this.on("dom:ready", this.domReady.bind(this));
+    this.on("tag:ready", this.tagReady.bind(this));
   }
 
   setupDatabase() {
@@ -77,6 +97,9 @@ export default class ExternalLinksRule extends Rule {
   }
 
   check(url, element) {
+    // Normalize URL to handle case-insensitive domains
+    const normalizedUrl = normalizeUrl(url);
+
     // Use shell-quote to safely escape the URL
     const escapedUrl = shellEscape([url]);
 
@@ -95,7 +118,7 @@ export default class ExternalLinksRule extends Rule {
 
     this.db
       .prepare("REPLACE INTO urls (url, status, redirect_to, time) VALUES (?, ?, ?, unixepoch())")
-      .run(url, statusCodeFolded, redirectTo);
+      .run(normalizedUrl, statusCodeFolded, redirectTo);
     if (statusCodeFolded < 200 || statusCodeFolded >= 300) {
       if (redirectTo) {
         this.report({
@@ -116,6 +139,9 @@ export default class ExternalLinksRule extends Rule {
    */
   // Access with proxy
   checkWithProxy(url, element) {
+    // Normalize URL to handle case-insensitive domains
+    const normalizedUrl = normalizeUrl(url);
+
     const urlWithQuery = `${PROXY_URL}?url=${encodeURIComponent(url)}`;
     // Use shell-quote to safely escape the URL
     const escapedUrl = shellEscape([urlWithQuery]);
@@ -133,7 +159,7 @@ export default class ExternalLinksRule extends Rule {
 
     this.db
       .prepare("REPLACE INTO urls (url, status, redirect_to, time) VALUES (?, ?, ?, unixepoch())")
-      .run(url, statusCode, redirectTo);
+      .run(normalizedUrl, statusCode, redirectTo);
     if (statusCode < 200 || statusCode >= 300) {
       if (redirectTo) {
         this.report({
@@ -149,48 +175,53 @@ export default class ExternalLinksRule extends Rule {
     }
   }
 
-  domReady({ document }) {
-    const aElements = document.getElementsByTagName("a");
-    for (const aElement of aElements) {
-      if (!aElement.hasAttribute("href")) {
-        continue;
-      }
+  // Check for href external links
+  tagReady({ target }) {
+    // TODO: also check image.src, link.href, script.src
+    if (target.tagName !== "a") {
+      return;
+    }
 
-      const href = aElement.getAttribute("href").value;
-      if (!href || !/^https?:\/\//i.test(href)) {
-        continue;
-      }
+    if (!target.hasAttribute("href")) {
+      return;
+    }
 
-      // Skip URLs that match the skip URLs regex
-      const url = href;
-      if (this.skipUrlsRegex.some((regex) => regex.test(url))) {
-        continue;
-      }
+    // Decode the URL from the href attribute, see https://gitlab.com/html-validate/html-validate/-/issues/218
+    // Quickly replace a few common HTML entities, TODO use a real approach for this
+    const url = target.getAttribute("href").value.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<");
 
-      // Use cache if the URL is in there
-      const row = this.db.prepare("SELECT * FROM urls WHERE url = ?").get(url);
-      if (row) {
-        if (row.redirect_to) {
-          this.report({
-            node: aElement,
-            message: `external link ${url} redirects to: ${row.redirect_to}`,
-          });
-          continue;
-        }
-        if (row.status < 200 || row.status >= 300) {
-          this.report({
-            node: aElement,
-            message: `external link is broken with status ${row.status}: ${url}`,
-          });
-          continue;
-        }
-      }
+    if (/^https?:\/\//i.test(url) === false) {
+      return;
+    }
 
-      if (PROXY_URL !== null) {
-        this.checkWithProxy(url, aElement);
-      } else {
-        this.check(url, aElement);
+    if (this.skipUrlsRegex.some((regex) => regex.test(url))) {
+      return;
+    }
+
+    const normalizedUrl = normalizeUrl(url);
+    // Use cache if the URL is in there
+    const row = this.db.prepare("SELECT * FROM urls WHERE url = ?").get(normalizedUrl);
+    if (row) {
+      if (row.redirect_to) {
+        this.report({
+          node: target,
+          message: `external link ${url} redirects to: ${row.redirect_to}`,
+        });
+        return;
       }
+      if (row.status < 200 || row.status >= 300) {
+        this.report({
+          node: target,
+          message: `external link is broken with status ${row.status}: ${url}`,
+        });
+        return;
+      }
+    }
+
+    if (PROXY_URL !== null) {
+      this.checkWithProxy(url, target);
+    } else {
+      this.check(url, target);
     }
   }
 }
